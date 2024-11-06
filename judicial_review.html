@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judicial Review Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-header, .sticky-footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .sticky-header {
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        .logo {
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
+        .toggle-button {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .navbar {
+            display: none;
+            flex-direction: column;
+            background-color: #007bff;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 10px 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: #2196F3;
+            margin-top: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 12px;
+        }
+
+        label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    padding-left: 10px; /* Adjust the value to your desired indent */
+}
+
+        select, input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border: 1px solid #2196F3;
+        }
+
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e88e5;
+        }
+
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .recommendation h3 {
+            margin: 0;
+            color: #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+            }
+            .container {
+                margin: 10px;
+            }
+        }
+
+        .sticky-footer {
+            bottom: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <h1 class="logo">Legal Assistant</h1>
+    <div class="toggle-button" onclick="toggleNavbar()">&#9776;</div>
+</header>
+
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+        <li><a href="civil.html">Civil Matters</a></li>
+        <li><a href="criminal_court.html">Criminal Matters</a></li>
+        <li><a href="family.html">Family Matters</a></li>
+        <li><a href="commercial.html">Commercial & Tax</a></li>
+        <li><a href="admiralty.html">Admiralty</a></li>
+        <li><a href="judicial_review.html">Judicial Review</a></li>
+        <li><a href="anti_corruption.html">Anti-Corruption</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <div class="container">
+        <h2><i class="fas fa-gavel"></i> Judicial Review Case Information</h2>
+        <img src="assets/judicial_review_law.png" alt="Judicial Review" />
+        <form id="judicialReviewForm">
+            <label for="county">Select County</label>
+            <select id="county" required>
+                <option value="">Select County</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="Mombasa">Mombasa</option>
+                <option value="Nakuru">Nakuru</option>
+                <option value="Kisumu">Kisumu</option>
+                <option value="Eldoret">Eldoret</option>
+                <!-- Add more counties as needed -->
+            </select>
+
+            <label for="caseDetails">Brief Description of the Case</label>
+            <input type="text" id="caseDetails" placeholder="Describe the case" required>
+
+            <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+        </form>
+
+        <div id="recommendation" class="recommendation">
+            <h3>Recommendation</h3>
+            <div id="recommendationContent"></div>
+        </div>
+
+        <script>
+            document.getElementById('judicialReviewForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const county = document.getElementById('county').value;
+                let recommendation;
+
+                switch (county) {
+                    case "Nairobi":
+                        recommendation = "File your case at the High Court of Kenya, Nairobi.";
+                        break;
+                    case "Mombasa":
+                        recommendation = "File your case at the High Court of Kenya, Mombasa.";
+                        break;
+                    case "Nakuru":
+                        recommendation = "File your case at the High Court of Kenya, Nakuru.";
+                        break;
+                    case "Kisumu":
+                        recommendation = "File your case at the High Court of Kenya, Kisumu.";
+                        break;
+                    case "Eldoret":
+                        recommendation = "File your case at the High Court of Kenya, Eldoret.";
+                        break;
+                    default:
+                        recommendation = "Please select a valid county.";
+                }
+
+                const recommendationContent = `
+                    For your judicial review case in <strong>${county}</strong>, we recommend:
+                    <p>${recommendation}</p>
+                `;
+
+                document.getElementById('recommendationContent').innerHTML = recommendationContent;
+                document.getElementById('recommendation').style.display = 'block';
+            });
+
+            function toggleNavbar() {
+                const navbar = document.getElementById("navbar");
+                navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+                document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
+            }
+        </script>
+    </div>
+</div>
+
+<footer class="sticky-footer">
+    <p>&copy; 2024 Legal Assistant. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

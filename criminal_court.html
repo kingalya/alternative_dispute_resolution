@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criminal Court Inquiry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-header, .sticky-footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .sticky-header {
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        .logo {
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
+        .toggle-button {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .navbar {
+            display: none;
+            flex-direction: column;
+            background-color: #007bff;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 10px 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: #2196F3;
+            margin-top: 0;
+        }
+
+        .form-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: left; /* Align labels to the left */
+            margin-left: 10px; /* Add indentation */
+        }
+
+        select, input[type="text"], input[type="email"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus, input[type="email"]:focus {
+            border: 1px solid #2196F3;
+        }
+
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e88e5;
+        }
+
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .recommendation h3 {
+            margin: 0;
+            color: #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+            }
+            .container {
+                margin: 10px;
+            }
+        }
+
+        .sticky-footer {
+            bottom: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <h1 class="logo">Legal Assistant</h1>
+    <div class="toggle-button" onclick="toggleNavbar()">&#9776;</div>
+</header>
+
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+        <li><a href="civil.html">Civil Matters</a></li>
+        <li><a href="criminal_court.html">Criminal Matters</a></li>
+        <li><a href="family.html">Family Matters</a></li>
+        <li><a href="commercial.html">Commercial & Tax</a></li>
+        <li><a href="admiralty.html">Admiralty</a></li>
+        <li><a href="judicial_review.html">Judicial Review</a></li>
+        <li><a href="anti_corruption.html">Anti-Corruption</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <div class="container">
+        <h2><i class="fas fa-balance-scale"></i> Criminal Court Inquiry</h2>
+        <img src="assets/criminal_law.png" alt="Court Image" class="form-image"> <!-- Replace with your image URL -->
+        <form id="criminalForm">
+            <label for="county">County</label>
+            <select id="county" required>
+                <option value="">Select County</option>
+                <option value="Baringo">Baringo</option>
+                <option value="Bomet">Bomet</option>
+                <option value="Bungoma">Bungoma</option>
+                <option value="Busia">Busia</option>
+                <option value="Elgeyo-Marakwet">Elgeyo-Marakwet</option>
+                <option value="Embu">Embu</option>
+                <option value="Garissa">Garissa</option>
+                <option value="Homa Bay">Homa Bay</option>
+                <option value="Isiolo">Isiolo</option>
+                <option value="Kajiado">Kajiado</option>
+                <option value="Kakamega">Kakamega</option>
+                <option value="Kericho">Kericho</option>
+                <option value="Kiambu">Kiambu</option>
+                <option value="Kilifi">Kilifi</option>
+                <option value="Kirinyaga">Kirinyaga</option>
+                <option value="Kisii">Kisii</option>
+                <option value="Kisumu">Kisumu</option>
+                <option value="Kitui">Kitui</option>
+                <option value="Kwale">Kwale</option>
+                <option value="Laikipia">Laikipia</option>
+                <option value="Lamu">Lamu</option>
+                <option value="Machakos">Machakos</option>
+                <option value="Makueni">Makueni</option>
+                <option value="Mandera">Mandera</option>
+                <option value="Meru">Meru</option>
+                <option value="Migori">Migori</option>
+                <option value="Marsabit">Marsabit</option>
+                <option value="Mombasa">Mombasa</option>
+                <option value="Murang'a">Murang'a</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="Nakuru">Nakuru</option>
+                <option value="Nandi">Nandi</option>
+                <option value="Narok">Narok</option>
+                <option value="Nyamira">Nyamira</option>
+                <option value="Nyandarua">Nyandarua</option>
+                <option value="Nyeri">Nyeri</option>
+                <option value="Samburu">Samburu</option>
+                <option value="Siaya">Siaya</option>
+                <option value="Taita-Taveta">Taita-Taveta</option>
+                <option value="Tana River">Tana River</option>
+                <option value="Tharaka-Nithi">Tharaka-Nithi</option>
+                <option value="Trans Nzoia">Trans Nzoia</option>
+                <option value="Uasin Gishu">Uasin Gishu</option>
+                <option value="Vihiga">Vihiga</option>
+                <option value="Wajir">Wajir</option>
+                <option value="West Pokot">West Pokot</option>
+                <option value="Nairobi City">Nairobi City</option>
+            </select>
+
+            <label for="caseType">Type of Case</label>
+            <select id="caseType" required>
+                <option value="">Select Case Type</option>
+                <option value="Felony">Felony</option>
+                <option value="Misdemeanor">Misdemeanor</option>
+                <option value="Traffic">Traffic</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="defendantName">Defendant's Name</label>
+            <input type="text" id="defendantName" placeholder="Enter defendant's name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <button type="submit">Submit Inquiry</button>
+        </form>
+
+        <div class="recommendation" id="recommendation">
+            <h3>Recommendations</h3>
+            <p id="recommendationText"></p>
+        </div>
+    </div>
+</div>
+
+<footer class="sticky-footer">
+    &copy; 2024 Legal Assistant. All rights reserved.
+</footer>
+
+<script>
+    function toggleNavbar() {
+        var navbar = document.getElementById("navbar");
+        navbar.style.display = (navbar.style.display === "none" || navbar.style.display === "") ? "flex" : "none";
+    }
+
+    document.getElementById("criminalForm").onsubmit = function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Display a recommendation based on selected values
+        var county = document.getElementById("county").value;
+        var caseType = document.getElementById("caseType").value;
+        
+        var recommendationText = "For " + caseType + " cases in " + county + ", you may consider consulting with a legal expert.";
+        
+        document.getElementById("recommendationText").innerText = recommendationText;
+        document.getElementById("recommendation").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admiralty Court Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full height for fixed header and footer */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-header, .sticky-footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .sticky-header {
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px; /* Height of header */
+        }
+
+        .logo {
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
+        .toggle-button {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .navbar {
+            display: none;
+            flex-direction: column;
+            background-color: #007bff;
+            position: absolute;
+            top: 50px; /* Height of the header */
+            right: 0;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 10px 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            flex-grow: 1; /* Grow to fill available space */
+            margin-top: 60px; /* Margin to avoid header overlap */
+            margin-bottom: 60px; /* Margin to avoid footer overlap */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            padding: 20px;
+            margin: 0 auto; /* Center the container */
+            max-width: 800px; /* Set max width for the container */
+        }
+
+        h2 {
+            color: #2196F3;
+            margin-top: 0; /* Reset margin to avoid extra space */
+        }
+
+        img {
+            display: block; /* Center the image */
+            max-width: 100%; /* Make the image responsive */
+            height: auto; /* Maintain aspect ratio */
+            margin: 20px auto; /* Space around the image */
+            border-radius: 12px; /* Optional: round the corners of the image */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        select, input[type="text"] {
+            width: calc(100% - 24px); /* Full width minus padding */
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box; /* Include padding and border in the width */
+            transition: border 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border: 1px solid #2196F3;
+        }
+
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e88e5;
+        }
+
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .recommendation h3 {
+            margin: 0;
+            color: #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+            }
+            .container {
+                margin: 10px; /* Adjust margins for smaller screens */
+            }
+        }
+
+        .sticky-footer {
+            bottom: 0;
+            height: 60px; /* Increased height for better spacing */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <h1 class="logo">Legal Assistant</h1>
+    <div class="toggle-button" onclick="toggleNavbar()">&#9776;</div>
+</header>
+
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+        <li><a href="civil.html">Civil Matters</a></li>
+        <li><a href="criminal_court.html">Criminal Matters</a></li>
+        <li><a href="family.html">Family Matters</a></li>
+        <li><a href="commercial.html">Commercial & Tax</a></li>
+        <li><a href="admiralty.html">Admiralty</a></li>
+        <li><a href="judicial_review.html">Judicial Review</a></li>
+        <li><a href="anti_corruption.html">Anti-Corruption</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <div class="container">
+        <h2><i class="fas fa-anchor"></i> Admiralty Court Case Information</h2>
+        <img src="assets/admiralty_law.png" alt="Admiralty Law" />
+        <form id="admiraltyForm">
+            <label for="caseType">Type of Admiralty Case</label>
+            <select id="caseType" required>
+                <option value="">Select Case Type</option>
+                <option value="maritime_cargo_dispute">Maritime Cargo Dispute</option>
+                <option value="collision">Collision of Vessels</option>
+                <option value="salvage_claim">Salvage Claim</option>
+                <option value="seafarers_wages">Seafarers’ Wages</option>
+                <option value="general_admiralty">Other Admiralty Matters</option>
+            </select>
+
+            <label for="claimAmount">Amount in Dispute (KES)</label>
+            <input type="text" id="claimAmount" placeholder="Enter amount in KES" required>
+
+            <label for="claimDetails">Brief Description of the Claim</label>
+            <input type="text" id="claimDetails" placeholder="Describe the nature of the claim" required>
+
+            <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+        </form>
+
+        <div id="recommendation" class="recommendation">
+            <h3>Recommendation</h3>
+            <div id="recommendationContent"></div>
+        </div>
+
+        <script>
+            document.getElementById('admiraltyForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                document.getElementById('recommendationContent').innerHTML = 
+                    "File your case in the Admiralty Division of the High Court in Mombasa. " + 
+                    "This division exclusively handles admiralty and maritime cases.";
+                document.getElementById('recommendation').style.display = 'block';
+            });
+
+            function toggleNavbar() {
+                const navbar = document.getElementById("navbar");
+                navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+                document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
+            }
+        </script>
+    </div>
+</div>
+
+<footer class="sticky-footer">
+    <p>&copy; 2024 Legal Assistant. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
