@@ -12,7 +12,7 @@
             color: #333;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Full height for fixed header and footer */
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -32,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 50px; /* Height of header */
+            height: 50px;
         }
 
         .logo {
@@ -40,11 +40,12 @@
             font-size: 1.5em;
         }
 
-      .toggle-button {
+        .toggle-button {
             font-size: 24px;
             cursor: pointer;
             margin-right: 20px;
         }
+
         .navbar {
             display: none;
             flex-direction: column;
@@ -56,15 +57,18 @@
             padding: 10px 0;
             z-index: 1000;
         }
+
         .navbar ul {
             list-style: none;
             padding: 0;
             margin: 0;
             width: 100%;
         }
+
         .navbar ul li {
             width: 100%;
         }
+
         .navbar ul li a {
             color: white;
             text-decoration: none;
@@ -75,16 +79,16 @@
             border-bottom: 1px solid #0056b3;
             transition: background 0.3s;
         }
+
         .navbar ul li a:hover {
             background-color: #0056b3;
         }
 
-
         .content {
-            flex-grow: 1; /* Grow to fill available space */
-            margin-top: 60px; /* Margin to avoid header overlap */
-            margin-bottom: 60px; /* Margin to avoid footer overlap */
-            overflow-y: auto; /* Enable vertical scrolling */
+            flex-grow: 1;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            overflow-y: auto;
             padding: 20px;
         }
 
@@ -94,37 +98,36 @@
             border-radius: 12px;
             text-align: center;
             padding: 20px;
-            margin: 0 auto; /* Center the container */
-            max-width: 800px; /* Set max width for the container */
+            margin: 0 auto;
+            max-width: 800px;
         }
 
         h2 {
             color: #2196F3;
-            margin-top: 0; /* Reset margin to avoid extra space */
+            margin-top: 0;
         }
-
         img {
-            display: block; /* Center the image */
-            max-width: 100%; /* Make the image responsive */
-            height: auto; /* Maintain aspect ratio */
-            margin: 20px auto; /* Space around the image */
-            border-radius: 12px; /* Optional: round the corners of the image */
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 12px;
         }
 
         label {
             display: block;
             margin-top: 15px;
             font-weight: bold;
-            text-align: left; /* Align labels to the left */
+            text-align: left;
         }
 
         select, input[type="number"], textarea {
-            width: calc(100% - 24px); /* Full width minus padding */
+            width: calc(100% - 24px);
             padding: 12px;
             margin-top: 5px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-sizing: border-box; /* Include padding and border in the width */
+            box-sizing: border-box;
             transition: border 0.3s;
         }
 
@@ -133,9 +136,9 @@
         }
 
         textarea {
-            resize: vertical; /* Allow vertical resizing */
-            height: 100px; /* Set a default height */
-            padding: 12px; /* Ensure padding is consistent */
+            resize: vertical;
+            height: 100px;
+            padding: 12px;
         }
 
         button {
@@ -174,13 +177,13 @@
                 width: 100%;
             }
             .container {
-                margin: 10px; /* Adjust margins for smaller screens */
+                margin: 10px;
             }
         }
 
         .sticky-footer {
             bottom: 0;
-            height: 60px; /* Increased height for better spacing */
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -252,41 +255,73 @@
             </select>
 
             <label for="claimAmount">Amount in Dispute (KES)</label>
-            <input type="number" id="claimAmount" placeholder="Enter amount in KES" required>
+            <input type="number" id="claimAmount" name="claimAmount" min="0" required>
 
-            <label for="claimDetails">Brief Description of the Claim</label>
-            <textarea id="claimDetails" placeholder="Describe the nature of the claim" required></textarea>
+            <label for="courtCase">Do you already have a court case?</label>
+            <select id="courtCase" required>
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
 
-            <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+            <label for="details">Provide brief details of your case (optional)</label>
+            <textarea id="details" name="details"></textarea>
+
+            <button type="submit">Submit</button>
         </form>
 
         <div id="recommendation" class="recommendation">
-            <h3>Recommendation</h3>
-            <div id="recommendationContent"></div>
+            <h3>Recommendation:</h3>
+            <p id="recommendationText"></p>
         </div>
-
-        <script>
-            document.getElementById('commercialTaxForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                document.getElementById('recommendationContent').innerHTML = 
-                    "File your case at the Commercial and Tax Division of the High Court. " + 
-                    "This division specializes in commercial disputes and taxation matters.";
-                document.getElementById('recommendation').style.display = 'block';
-            });
-
-            function toggleNavbar() {
-                const navbar = document.getElementById("navbar");
-                navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
-                document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
-            }
-        </script>
     </div>
 </div>
 
 <footer class="sticky-footer">
-    <p>&copy; 2024 Legal Assistant. All rights reserved.</p>
+    <p>© 2024 Legal Assistant | All Rights Reserved</p>
 </footer>
+
+<script>
+    function toggleNavbar() {
+        const navbar = document.getElementById("navbar");
+        navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+    }
+
+    document.getElementById("commercialTaxForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const county = document.getElementById("county").value;
+        const claimAmount = parseFloat(document.getElementById("claimAmount").value);
+        const courtCase = document.getElementById("courtCase").value;
+
+        let recommendationText = "Based on your input, ";
+
+        if (courtCase === "yes") {
+            recommendationText += "you may need to consult your lawyer for further action.";
+        } else {
+            if (claimAmount > 20000000) {
+                recommendationText += "your case should be filed in the High Court.";
+            } else if (claimAmount >= 20000000) {
+                recommendationText += "your case should be filed in the Chief Magistrate's Court.";
+            } else if (claimAmount >= 15000000) {
+                recommendationText += "your case should be filed in the Senior Principal Magistrate's Court.";
+            } else if (claimAmount >= 10000000) {
+                recommendationText += "your case should be filed in the Principal Magistrate's Court.";
+            } else if (claimAmount >= 7000000) {
+                recommendationText += "your case should be filed in the Senior Resident Magistrate's Court.";
+            } else if (claimAmount >= 5000000) {
+                recommendationText += "your case should be filed in the Resident Magistrate's Court.";
+            } else if (claimAmount < 1000000) {
+                recommendationText += "your case should be filed in the Small Claims Court.";
+            } else {
+                recommendationText += "you may proceed to the nearest Commercial & Tax Court or seek ADR options.";
+            }
+        }
+
+        document.getElementById("recommendationText").textContent = recommendationText;
+        document.getElementById("recommendation").style.display = "block";
+    });
+</script>
+
 
 </body>
 </html>
