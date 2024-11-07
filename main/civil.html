@@ -335,41 +335,72 @@
             const navbar = document.getElementById("navbar");
             navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
         }
-
+    
         document.getElementById("civilMattersForm").addEventListener("submit", function (e) {
             e.preventDefault();
-
+    
             const county = document.getElementById("county").value;
             const agreement = document.getElementById("agreement").value;
             const claimType = document.getElementById("claimType").value;
-            const amount = document.getElementById("amount").value;
+            const amount = parseFloat(document.getElementById("amount").value);
             const arbitrationClause = document.getElementById("arbitrationClause").value;
             const adrOption = document.getElementById("adrOption").value;
             const tribunal = Array.from(document.getElementById("tribunal").selectedOptions).map(option => option.value);
             const partiesMilitary = document.getElementById("partiesMilitary").value;
-
-            let recommendationMessage = "Based on your input, here are the recommendations:";
-            const recommendationList = document.getElementById("recommendationList");
-
-            if (claimType === "Civil" && amount > 500000) {
-                recommendationMessage += "<li>Consider filing a claim in the High Court.</li>";
+    
+            let recommendationMessage = `Based on your input, here are the recommendations: 
+                <ul>
+                    <li>Selected County: ${county}</li>
+                    <li>Agreement Type: ${agreement}</li>
+                    <li>Claim Type: ${claimType}</li>
+                    <li>Claim Amount: ${amount}</li>
+                    <li>Arbitration Clause: ${arbitrationClause}</li>
+                    <li>ADR Option: ${adrOption}</li>
+                    <li>Selected Tribunals: ${tribunal.join(", ") || "None"}</li>
+                    <li>Military Parties Involved: ${partiesMilitary}</li>
+                </ul>`;
+    
+            // Recommendations based on claim type
+            if (claimType === "Environmental") {
+                recommendationMessage += `<li>Consider filing your case in the Environment and Land Court, a division of the High Court, in ${county} County.</li>`;
+            } else if (claimType === "Employment and Labor") {
+                recommendationMessage += `<li>Consider filing your case in the Employment and Labor Relations Court in ${county} County.</li>`;
+            } else if (claimType === "Civil") {
+                // Recommendations based on the amount for civil cases
+                if (amount > 20000000) {
+                    recommendationMessage += `<li>Claims above 20 million should be filed in the High Court in ${county} County.</li>`;
+                } else if (amount > 15000000) {
+                    recommendationMessage += `<li>Claims up to 15 million are recommended for the Senior Principal Magistrate in ${county} County.</li>`;
+                } else if (amount > 10000000) {
+                    recommendationMessage += `<li>Claims up to 10 million are recommended for the Principal Magistrate Court in ${county} County.</li>`;
+                } else if (amount > 7000000) {
+                    recommendationMessage += `<li>Claims up to 7 million are recommended for the Senior Resident Magistrate in ${county} County.</li>`;
+                } else if (amount > 5000000) {
+                    recommendationMessage += `<li>Claims up to 5 million are recommended for the Resident Magistrate in ${county} County.</li>`;
+                } else if (amount <= 1000000) {
+                    recommendationMessage += `<li>Matters less than 1 million should be taken to the Small Claims Court Tribunal in ${county} County.</li>`;
+                }
             }
-
-            if (arbitrationClause === "Yes" && adrOption === "Yes") {
-                recommendationMessage += "<li>Arbitration may be a viable option. Consider consulting with an arbitrator.</li>";
-            }
-
+    
+            // Tribunal-specific recommendation
             if (tribunal.length > 0) {
-                recommendationMessage += "<li>Your matter might fall under a tribunal. Ensure you explore relevant tribunal options.</li>";
+                recommendationMessage += `<li>Since a tribunal was selected (${tribunal.join(", ")}), ensure that your case aligns with the relevant tribunal processes in ${county} County.</li>`;
             }
-
+    
+            // Arbitration and mediation recommendations
+            if (arbitrationClause === "Yes" || adrOption === "Yes") {
+                recommendationMessage += "<li>Arbitration and mediation are viable options to consider for resolving the dispute.</li>";
+            }
+    
+            // Special case for military parties
             if (partiesMilitary === "Yes") {
-                recommendationMessage += "<li>Special considerations apply if both parties are in the military.</li>";
+                recommendationMessage += "<li>Special considerations apply as both parties are in the military. These cases may be referred to a court martial.</li>";
             }
-
+    
             document.getElementById("recommendation").style.display = "block";
             recommendationList.innerHTML = recommendationMessage;
         });
     </script>
+    
 </body>
 </html>
