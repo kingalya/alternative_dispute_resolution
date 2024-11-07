@@ -328,50 +328,116 @@
         </div>
     </div>
 
-<script>
-    function toggleNavbar() {
-        const navbar = document.getElementById("navbar");
-        navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
-        document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
-    }
-
-    function toggleChatbox() {
-        const chatbox = document.getElementById("chatbox");
-        chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
-    }
-
-    function sendMessage() {
-        const userInput = document.getElementById("user-input");
-        const message = userInput.value.trim();
-        if (message === "") return;
-
-        const chatboxMessages = document.getElementById("chatbox-messages");
-
-        // Display user's message
-        const userMessage = document.createElement("div");
-        userMessage.textContent = message;
-        userMessage.style.textAlign = "right";
-        userMessage.style.margin = "5px 0";
-        chatboxMessages.appendChild(userMessage);
-
-        // Clear input field
-        userInput.value = "";
-
-        // Simulate a bot response
-        setTimeout(() => {
-            const botMessage = document.createElement("div");
-            botMessage.textContent = "This is a simulated response. For legal advice, please consult a qualified Advocate.";
-            botMessage.style.textAlign = "left";
-            botMessage.style.margin = "5px 0";
-            botMessage.style.backgroundColor = "#e0e0e0";
-            botMessage.style.padding = "5px";
-            botMessage.style.borderRadius = "5px";
-            chatboxMessages.appendChild(botMessage);
-
-            // Scroll to the latest message
-            chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
-        }, 1000);
-    }
-</script>
+    <script>
+        function toggleNavbar() {
+            const navbar = document.getElementById("navbar");
+            navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+            document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
+        }
+    
+        function toggleChatbox() {
+            const chatbox = document.getElementById("chatbox");
+            chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+        }
+    
+        let conversationStep = 0; // To keep track of the conversation flow
+    
+        function sendMessage() {
+            const userInput = document.getElementById("user-input");
+            const message = userInput.value.trim();
+            if (message === "") return;
+    
+            const chatboxMessages = document.getElementById("chatbox-messages");
+    
+            // Display user's message
+            const userMessage = document.createElement("div");
+            userMessage.textContent = message;
+            userMessage.style.textAlign = "right";
+            userMessage.style.margin = "5px 0";
+            chatboxMessages.appendChild(userMessage);
+    
+            // Clear input field
+            userInput.value = "";
+    
+            // Simulate a bot response
+            setTimeout(() => {
+                const botMessage = document.createElement("div");
+                botMessage.style.textAlign = "left";
+                botMessage.style.margin = "5px 0";
+                botMessage.style.backgroundColor = "#e0e0e0";
+                botMessage.style.padding = "5px";
+                botMessage.style.borderRadius = "5px";
+                
+                switch (conversationStep) {
+                    case 0:
+                        botMessage.textContent = "Welcome to the Civil Matters Assistant! Please choose the type of case you are filing: \n1. Land Dispute \n2. Contract Dispute \n3. Employment Dispute";
+                        botMessage.innerHTML += "<br><br>Type '1', '2', or '3' to proceed.";
+                        conversationStep++;
+                        break;
+                    case 1:
+                        // Determine the case type based on the selection
+                        let caseType;
+                        if (message === '1') {
+                            caseType = 'Land Dispute';
+                        } else if (message === '2') {
+                            caseType = 'Contract Dispute';
+                        } else if (message === '3') {
+                            caseType = 'Employment Dispute';
+                        } else {
+                            caseType = null;
+                        }
+    
+                        if (caseType) {
+                            botMessage.textContent = `You selected ${caseType}. Now, please select the amount in dispute (in KES): \n1. Below 1 million \n2. 1 million - 5 million \n3. 5 million - 10 million \n4. 10 million - 15 million \n5. 15 million - 20 million \n6. Above 20 million`;
+                            botMessage.innerHTML += "<br><br>Type '1', '2', '3', '4', '5', or '6' to proceed.";
+                            conversationStep++;
+                        } else {
+                            botMessage.textContent = "Invalid choice. Please choose a valid case type (1, 2, or 3).";
+                        }
+                        break;
+                    case 2:
+                        // Handle the amount and provide court recommendation
+                        let recommendationText = "Based on the amount, ";
+    
+                        switch (message) {
+                            case '1':
+                                recommendationText += "your case should be filed in the Small Claims Court.";
+                                break;
+                            case '2':
+                                recommendationText += "your case should be filed in the Resident Magistrate's Court.";
+                                break;
+                            case '3':
+                                recommendationText += "your case should be filed in the Senior Resident Magistrate's Court.";
+                                break;
+                            case '4':
+                                recommendationText += "your case should be filed in the Principal Magistrate's Court.";
+                                break;
+                            case '5':
+                                recommendationText += "your case should be filed in the Senior Principal Magistrate's Court.";
+                                break;
+                            case '6':
+                                recommendationText += "your case should be filed in the High Court.";
+                                break;
+                            default:
+                                recommendationText = "Invalid amount. Please choose a valid option.";
+                        }
+    
+                        botMessage.textContent = recommendationText;
+                        conversationStep++;
+                        break;
+                    case 3:
+                        botMessage.textContent = "Thank you for your information! If you need further assistance, feel free to ask.";
+                        conversationStep = 0; // Reset conversation for new inquiries
+                        break;
+                }
+    
+                chatboxMessages.appendChild(botMessage);
+    
+                // Scroll to the latest message
+                chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+            }, 1000);
+        }
+    </script>
+    
 </body>
 </html>
