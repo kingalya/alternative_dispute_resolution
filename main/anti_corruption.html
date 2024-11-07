@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commercial & Tax Court Form</title>
+    <title>Admiralty Court Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body, html {
@@ -12,7 +12,7 @@
             color: #333;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Full height for fixed header and footer */
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -32,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 50px; /* Height of header */
+            height: 50px;
         }
 
         .logo {
@@ -50,32 +50,32 @@
             display: none;
             flex-direction: column;
             background-color: #007bff;
-            position: absolute;
-            top: 50px; /* Height of the header */
+            position: fixed;
+            top: 50px;
             right: 0;
-            width: 200px;
-            padding: 10px;
-            border-radius: 5px;
+            width: 100%;
+            padding: 10px 0;
+            z-index: 1000;
         }
 
         .navbar ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            width: 100%;
         }
 
         .navbar ul li {
-            margin: 10px 0;
-            padding-left: 10px;
-            padding-right: 10px;
+            width: 100%;
         }
 
         .navbar ul li a {
             color: white;
             text-decoration: none;
-            padding: 10px;
+            padding: 15px;
             display: block;
-            border-radius: 3px;
+            text-align: left;
+            border-bottom: 1px solid #0056b3;
             transition: background 0.3s;
         }
 
@@ -84,10 +84,10 @@
         }
 
         .content {
-            flex-grow: 1; /* Grow to fill available space */
-            margin-top: 60px; /* Margin to avoid header overlap */
-            margin-bottom: 60px; /* Margin to avoid footer overlap */
-            overflow-y: auto; /* Enable vertical scrolling */
+            flex-grow: 1;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            overflow-y: auto;
             padding: 20px;
         }
 
@@ -97,42 +97,32 @@
             border-radius: 12px;
             text-align: center;
             padding: 20px;
-            margin: 0 auto; /* Center the container */
-            max-width: 800px; /* Set max width for the container */
+            margin: 0 auto;
+            max-width: 800px;
         }
 
         h2 {
             color: #2196F3;
-            margin-top: 0; /* Reset margin to avoid extra space */
-        }
-
-        img {
-            display: block; /* Center the image */
-            max-width: 100%; /* Make the image responsive */
-            height: auto; /* Maintain aspect ratio */
-            margin: 20px auto; /* Space around the image */
-            border-radius: 12px; /* Optional: round the corners of the image */
+            margin-top: 0;
         }
 
         label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: left; /* Ensures text is aligned left */
-    margin-left: 20px; /* Adds left indentation */
-}
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-        select, input[type="number"], input[type="text"] {
-            width: calc(100% - 24px); /* Full width minus padding */
+        select, input[type="text"] {
+            width: calc(100% - 24px);
             padding: 12px;
             margin-top: 5px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-sizing: border-box; /* Include padding and border in the width */
+            box-sizing: border-box;
             transition: border 0.3s;
         }
 
-        select:focus, input[type="number"]:focus, input[type="text"]:focus {
+        select:focus, input[type="text"]:focus {
             border: 1px solid #2196F3;
         }
 
@@ -155,30 +145,31 @@
 
         .recommendation {
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             background: #e7f3fe;
             border-left: 6px solid #2196F3;
             border-radius: 8px;
-            display: none;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 1.2em;
+            color: #333;
         }
 
         .recommendation h3 {
             margin: 0;
             color: #2196F3;
+            font-size: 1.5em;
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                width: 100%;
-            }
             .container {
-                margin: 10px; /* Adjust margins for smaller screens */
+                margin: 10px;
             }
         }
 
         .sticky-footer {
             bottom: 0;
-            height: 60px; /* Increased height for better spacing */
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -194,114 +185,76 @@
 
 <nav id="navbar" class="navbar">
     <ul>
-      <li><a href="index.html">Home</a></li>
-        <li><a href="civil.html">Civil Matters</a></li>
-        <li><a href="criminal_court.html">Criminal Matters</a></li>
-        <li><a href="family.html">Family Matters</a></li>
-        <li><a href="commercial.html">Commercial & Tax</a></li>
-        <li><a href="admiralty.html">Admiralty</a></li>
-        <li><a href="judicial_review.html">Judicial Review</a></li>
-        <li><a href="anti_corruption.html">Anti-Corruption</a></li>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="civil.html"><i class="fas fa-balance-scale"></i> Civil Matters</a></li>
+        <li><a href="criminal_court.html"><i class="fas fa-gavel"></i> Criminal Matters</a></li>
+        <li><a href="family.html"><i class="fas fa-heart"></i> Family Matters</a></li>
+        <li><a href="commercial.html"><i class="fas fa-building"></i> Commercial & Tax</a></li>
+        <li><a href="admiralty.html"><i class="fas fa-anchor"></i> Admiralty</a></li>
+        <li><a href="judicial_review.html"><i class="fas fa-search"></i> Judicial Review</a></li>
+        <li><a href="anti_corruption.html"><i class="fas fa-shield-alt"></i> Anti-Corruption</a></li>
     </ul>
 </nav>
 
 <div class="content">
     <div class="container">
-        <h2><i class="fas fa-balance-scale"></i> Commercial & Tax Court Form</h2>
-        <img src="assets/commercial_law.png" alt="Commercial Tax Law" />
-        <form id="commercialTaxForm">
-            <label for="county">Where did the course of action arise?</label>
-            <select id="county" required>
-                <option value="">Select County</option>
-                <option value="Nairobi">Nairobi</option>
-                <option value="Mombasa">Mombasa</option>
-                <option value="Nakuru">Nakuru</option>
-                <option value="Kisumu">Kisumu</option>
-                <option value="Eldoret">Eldoret</option>
-                <option value="Meru">Meru</option>
-                <option value="Nyeri">Nyeri</option>
-                <option value="Machakos">Machakos</option>
-                <option value="Kiambu">Kiambu</option>
-                <option value="Uasin Gishu">Uasin Gishu</option>
-                <option value="Kakamega">Kakamega</option>
-                <option value="Kisii">Kisii</option>
-                <option value="Bomet">Bomet</option>
-                <option value="Bungoma">Bungoma</option>
-                <option value="Busia">Busia</option>
-                <option value="Laikipia">Laikipia</option>
-                <option value="Nandi">Nandi</option>
-                <option value="Narok">Narok</option>
-                <option value="Samburu">Samburu</option>
-                <option value="Taita Taveta">Taita Taveta</option>
-                <option value="Tana River">Tana River</option>
-                <option value="Tharaka Nithi">Tharaka Nithi</option>
-                <option value="Trans Nzoia">Trans Nzoia</option>
-                <option value="Wajir">Wajir</option>
-                <option value="West Pokot">West Pokot</option>
-                <option value="Kitui">Kitui</option>
-                <option value="Lamu">Lamu</option>
-                <option value="Mandera">Mandera</option>
-                <option value="Marsabit">Marsabit</option>
-                <option value="Migori">Migori</option>
-                <option value="Nyamira">Nyamira</option>
-                <option value="Siaya">Siaya</option>
-                <option value="Vihiga">Vihiga</option>
-                <option value="Embu">Embu</option>
-                <option value="Kericho">Kericho</option>
-                <option value="Kilifi">Kilifi</option>
-                <option value="Nairobi">Nairobi</option>
-                <option value="Nakuru">Nakuru</option>
-                <option value="Nyamira">Nyamira</option>
-                <option value="Narok">Narok</option>
-                <option value="Tharaka Nithi">Tharaka Nithi</option>
-                <option value="Trans Nzoia">Trans Nzoia</option>
+        <h2><i class="fas fa-anchor"></i> Admiralty Court Case Information</h2>
+        <img src="assets/admiralty_law.png" alt="Admiralty" style="width:100%; margin-bottom: 20px;">
+        <form id="admiraltyForm">
+            <label for="caseType">Type of Admiralty Case</label>
+            <select id="caseType" required>
+                <option value="">Select Case Type</option>
+                <option value="maritime_cargo_dispute">Maritime Cargo Dispute</option>
+                <option value="collision">Collision of Vessels</option>
+                <option value="salvage_claim">Salvage Claim</option>
+                <option value="seafarers_wages">Seafarers’ Wages</option>
+                <option value="general_admiralty">Other Admiralty Matters</option>
             </select>
 
-            <label for="amount">Amount in Dispute (KSh):</label>
-            <input type="number" id="amount" name="amount" required>
-
-            <label for="description">Brief Description of the Case:</label>
-            <input type="text" id="description" name="description" required>
+            <label for="claimAmount">Amount in Dispute (KES)</label>
+            <input type="text" id="claimAmount" placeholder="Enter amount in KES" required>
 
             <button type="submit">Submit</button>
         </form>
 
         <div class="recommendation" id="recommendation">
             <h3>Recommendation</h3>
-            <p id="recommendationText"></p>
+            <p id="recommendationContent"></p>
         </div>
     </div>
 </div>
 
 <footer class="sticky-footer">
-    &copy; 2024 Legal Assistant. All rights reserved.
+    <p>&copy; 2024 Legal Assistant. All rights reserved.</p>
 </footer>
 
 <script>
-    function toggleNavbar() {
-        const navbar = document.getElementById('navbar');
-        navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    document.getElementById('commercialTaxForm').addEventListener('submit', function(event) {
+    document.getElementById('admiraltyForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const county = document.getElementById('county').value;
-        const amount = document.getElementById('amount').value;
-        const description = document.getElementById('description').value;
-
-        let recommendationText = '';
-
-        if (amount < 50000) {
-            recommendationText = 'Consider pursuing the matter in a Small Claims Court.';
-        } else if (amount >= 50000 && amount < 500000) {
-            recommendationText = 'You may file your case in the Commercial Court.';
-        } else {
-            recommendationText = 'Seek legal advice for filing in the High Court.';
+        const caseType = document.getElementById('caseType').value;
+        let recommendationText = "File your case in the Admiralty Division of the High Court in Mombasa. This division exclusively handles admiralty and maritime cases.";
+        
+        if (caseType === "maritime_cargo_dispute") {
+            recommendationText += "\n\nMaritime Cargo Dispute: Cases involving disputes over the shipping or cargo transport, often related to loss or damage during transit.";
+        } else if (caseType === "collision") {
+            recommendationText += "\n\nCollision of Vessels: Cases related to accidents where two or more vessels collide on water, causing damage or injury.";
+        } else if (caseType === "salvage_claim") {
+            recommendationText += "\n\nSalvage Claim: Disputes over the compensation for rescuing property or vessels in distress at sea.";
+        } else if (caseType === "seafarers_wages") {
+            recommendationText += "\n\nSeafarers’ Wages: Disputes related to unpaid wages or employment conditions of seafarers on vessels.";
+        } else if (caseType === "general_admiralty") {
+            recommendationText += "\n\nOther Admiralty Matters: Cases that do not fall into the specific categories but are still related to admiralty law, such as marine insurance or shipping contracts.";
         }
 
-        document.getElementById('recommendationText').innerText = recommendationText;
+        document.getElementById('recommendationContent').innerHTML = recommendationText;
         document.getElementById('recommendation').style.display = 'block';
     });
+
+    function toggleNavbar() {
+        const navbar = document.getElementById("navbar");
+        navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+        document.querySelector(".toggle-button").innerHTML = navbar.style.display === "flex" ? "&times;" : "&#9776;";
+    }
 </script>
 
 </body>

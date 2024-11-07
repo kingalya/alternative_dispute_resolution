@@ -40,48 +40,45 @@
             font-size: 1.5em;
         }
 
-        .toggle-button {
+      .toggle-button {
             font-size: 24px;
             cursor: pointer;
             margin-right: 20px;
         }
-
         .navbar {
             display: none;
             flex-direction: column;
             background-color: #007bff;
-            position: absolute;
-            top: 50px; /* Height of the header */
+            position: fixed;
+            top: 50px;
             right: 0;
-            width: 200px;
-            padding: 10px;
-            border-radius: 5px;
+            width: 100%;
+            padding: 10px 0;
+            z-index: 1000;
         }
-
         .navbar ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            width: 100%;
         }
-
         .navbar ul li {
-            margin: 10px 0;
-            padding-left: 10px;
-            padding-right: 10px;
+            width: 100%;
         }
-
         .navbar ul li a {
             color: white;
             text-decoration: none;
-            padding: 10px;
+            padding: 15px;
             display: block;
-            border-radius: 3px;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #0056b3;
             transition: background 0.3s;
         }
-
         .navbar ul li a:hover {
             background-color: #0056b3;
         }
+
 
         .content {
             flex-grow: 1; /* Grow to fill available space */
@@ -196,17 +193,16 @@
     <h1 class="logo">Legal Assistant</h1>
     <div class="toggle-button" onclick="toggleNavbar()">&#9776;</div>
 </header>
-
 <nav id="navbar" class="navbar">
     <ul>
-      <li><a href="index.html">Home</a></li>
-        <li><a href="civil.html">Civil Matters</a></li>
-        <li><a href="criminal_court.html">Criminal Matters</a></li>
-        <li><a href="family.html">Family Matters</a></li>
-        <li><a href="commercial.html">Commercial & Tax</a></li>
-        <li><a href="admiralty.html">Admiralty</a></li>
-        <li><a href="judicial_review.html">Judicial Review</a></li>
-        <li><a href="anti_corruption.html">Anti-Corruption</a></li>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="civil.html"><i class="fas fa-balance-scale"></i> Civil Matters</a></li>
+        <li><a href="criminal_court.html"><i class="fas fa-gavel"></i> Criminal Matters</a></li>
+        <li><a href="family.html"><i class="fas fa-heart"></i> Family Matters</a></li>
+        <li><a href="commercial.html"><i class="fas fa-building"></i> Commercial & Tax</a></li>
+        <li><a href="admiralty.html"><i class="fas fa-anchor"></i> Admiralty</a></li>
+        <li><a href="judicial_review.html"><i class="fas fa-search"></i> Judicial Review</a></li>
+        <li><a href="anti_corruption.html"><i class="fas fa-shield-alt"></i> Anti-Corruption</a></li>
     </ul>
 </nav>
 
